@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>U.S. Weather Explorer 2017</title>
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+
+  <body>
+    <header>
+      <h1>North America Weather Trends 2017</h1>
+      <div class="names">Amogh Gurram · Bhavini Pandey</div>
+      <p style="text-align:justify;">
+        Daily weather observations from NOAA's Global Historical Climatology Network, covering weather
+        stations across the United States and territories throughout 2017.
+        <strong>Click any state bar</strong> to trace its seasonal trend in
+        the line chart. Switch metrics using the dropdown. Hover for details.
+      </p>
+
+      
+
+      <p style="text-align:justify;">
+        <br> <br> <strong>Write up:</strong>
+      </p>
+
+      <p style="text-align:justify;">
+        We chose to work with the Daily Weather - 2017 dataset for our visualization. This data, provided by NOAA Daily Global Historical Climatology Network, included information about individual states and corresponding metric measurements. These metrics included max temperature, min temperature, average temperature, precipitation, snowfall, and average wind speed. There was other information provided in the dataset, such as latitude/longitude and more specific wind data, which we chose to omit from our visualization to focus our design. We ultimately focused on the state, the time (dates), and the key metrics mentioned above.  
+      </p>
+
+      <p style="text-align:justify;">
+        We used various interaction techniques to make our visualization more interesting. We used the Select technique in our bar chart (when the user clicks on a specific bar, the bar is highlighted and the line chart is updated with that specific state’s data). We used Filter with our dropdown to filter the specific information being shown on the visualization. We used Encode by having different colors to represent different regions of the US (and Canada) so that the user can easily make deductions about regional trends. A key example of brushing/linking/Explore is the line graph, which can scroll and pan to reveal more detailed information. Finally, we have an example of Elaborate in the tooltip, which provides more information on the state, region, metric information, and # of observations. We considered doing a map (choropleth specifically), but we decided against it because as we learned in class, it is harder for us to detect slight differences in colors vs slight differences in size, so we went with a bar chart.
+      </p>
+      <p style="text-align:justify;">
+        The data source we used was NOAA as provided in the project description. We did not use any existing visualization examples for inspiration, although there is a high chance of similarity between our visualization and other preexisting visualizations. 
+      </p>
+      <p style="text-align:justify;">
+        We worked in collaboration for the majority of this project. We came up with our design and our concept for the visualization together. Regarding the implementation, we split up individual components. Amogh worked on the state comparison bar chart, while Bhavini worked on the individual monthly trends. We worked together to join the two sections, and we also worked together on the introduction, HTML, and writeup. Additionally, we used AI (Claude) to help with the design and formatting of the project since neither of us are graphically gifted. Claude handled a lot of the CSS and visual components in JS.
+      </p>
+    </header>
+
+    <div class="controls">
+      <div class="control-group">
+        <label>METRIC</label>
+        <select id="metricSelect">
+          <option value="TMAX">TMAX — Max Temperature (°F)</option>
+          <option value="TMIN">TMIN — Min Temperature (°F)</option>
+          <option value="TAVG">TAVG — Avg Temperature (°F)</option>
+          <option value="PRCP">PRCP — Precipitation (in)</option>
+          <option value="SNOW">SNOW — Snowfall (in)</option>
+          <option value="AWND">AWND — Avg Wind Speed (mph)</option>
+        </select>
+      </div>
+      <div class="selection-info" id="selectionInfo">
+        <span id="selectedLabel">CA</span> selected — click another bar to switch
+      </div>
+    </div>
+
+    <div class="viz-container">
+      <div class="panel" id="barPanel">
+        <div class="panel-title">STATE COMPARISON</div>
+        <div class="panel-subtitle">Annual average by state · sorted descending · dashed = national avg</div>
+        <div id="barChart" style="flex:1; min-height:0;"></div>
+      </div>
+
+      <div class="panel" id="linePanel">
+        <div class="panel-title">MONTHLY TREND</div>
+        <div class="panel-subtitle" id="lineSubtitle">Monthly average for selected state(s)</div>
+        <div class="panel-subtitle"> <strong> Scroll to zoom · drag to pan </strong> </div>
+        <div id="lineChart" style="flex:1; min-height:0; margin-top:8px;"></div>
+      </div>
+    </div>
+    <div id="tooltip"></div>
+    <div class="legend" id="legendContainer"></div>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
